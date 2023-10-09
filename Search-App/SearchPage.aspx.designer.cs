@@ -69,22 +69,13 @@ namespace Search_App
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPostalCode;
 
         /// <summary>
-        /// rd_and control.
+        /// drLogicalOperator control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rd_and;
-
-        /// <summary>
-        /// rd_or control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton rd_or;
+        protected global::System.Web.UI.WebControls.DropDownList drLogicalOperator;
 
         /// <summary>
         /// btnSearch control.

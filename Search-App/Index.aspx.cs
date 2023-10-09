@@ -13,7 +13,8 @@ namespace Search_App
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            Session["AppName"] = null;
+            Session["AppCode"] = null;
         }
 
         protected void Login_Click(object sender, EventArgs e)
@@ -22,7 +23,8 @@ namespace Search_App
             uname = txt_username.Value.Trim();
             pwd = txt_password.Value.Trim();
             bool userValid = IsValidUser(uname,pwd);
-            if(userValid)
+           // Response.Redirect("SearchPage.aspx");
+            if (userValid)
             {
                 Response.Redirect("SearchPage.aspx");
             }
@@ -47,8 +49,8 @@ namespace Search_App
             }
             else
             {
-                Session["AppName"] = "";
-                Session["AppCode"] ="";
+                Session["AppName"] = null;
+                Session["AppCode"] =null;
 
             }
 

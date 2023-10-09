@@ -30,6 +30,7 @@
 
         body {
             overflow-x: hidden;
+            font-size: initial;
         }
 
         /* Toggle Styles */
@@ -152,14 +153,14 @@
             #page-content-wrapper {
                 padding: 20px;
                 position: relative;
-                background-color:#d3d3d3;
+                background-color: #d3d3d3;
             }
 
             #wrapper.toggled #page-content-wrapper {
                 position: relative;
                 margin-right: 0;
             }
-        } 
+        }
     </style>
 
     <asp:ContentPlaceHolder ID="header" runat="server">
@@ -206,7 +207,7 @@
             <!-- /#page-content-wrapper -->
 
         </div>
-        <!-- /#wrapper --> 
+        <!-- /#wrapper -->
     </form>
 </body>
 </html>

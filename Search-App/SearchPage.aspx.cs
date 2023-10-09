@@ -18,33 +18,7 @@ namespace Search_App
                 FillStates();
                 FillCities();
             }
-
-            #region static data -  Commented
-            DataTable dt = new DataTable();
-
-           /* adpt.Fill(dt);
-            DropDownList1.DataSource = dt;
-            DropDownList1.DataBind();
-            DropDownList1.DataTextField = "Name";
-            DropDownList1.DataValueField = "ID";
-            DropDownList1.DataBind();+*/
-
-            //DataTable dt = new DataTable();
-            /*dt.Columns.AddRange(new DataColumn[3] { new DataColumn("ItemId", typeof(int)),
-                    new DataColumn("ItemName", typeof(string)),
-                    new DataColumn("ItemQuantity",typeof(string)) });
-            dt.Rows.Add(1, "Flour", "500 Kg");
-            dt.Rows.Add(2, "Tea", "20 Kg");
-            dt.Rows.Add(3, "Rice", "1000 Kg");
-            gv_result.DataSource = dt;
-            gv_result.DataBind();
-
-            gv_result.UseAccessibleHeader = true;
-            gv_result.HeaderRow.TableSection = TableRowSection.TableHeader;*/
-            #endregion
-
-            //get data from db for states and cities for binging dropdowns
-
+            
         }
 
         protected void btnSearch_Click(object sender, EventArgs e)
@@ -60,7 +34,7 @@ namespace Search_App
                     City= (drpCity.SelectedIndex == 0)?"":drpCity.SelectedValue,//drpCity.SelectedValue,
                     PostalCode= txtPostalCode.Value
                 };
-            string appCode = "CRE";
+            string appCode = (string)Session["AppCode"];
 
             List<SResponse> result = new List<SResponse>();
             result = _search.SearchResult(sreq, appCode);
@@ -71,7 +45,6 @@ namespace Search_App
             {
                 gv_result.HeaderRow.TableSection = TableRowSection.TableHeader;
                 divResultsSection.Visible = true;
-
             }
         }
 
@@ -82,8 +55,8 @@ namespace Search_App
             txtPostalCode.Value = "";
             drpState.Items.Clear();
             drpCity.Items.Clear();
-           
-            rd_or.Checked = true;
+            drLogicalOperator.SelectedIndex = 0;
+           // rd_or.Checked = true;
             FillStates();
             FillCities();
             drpState.SelectedIndex = 0;

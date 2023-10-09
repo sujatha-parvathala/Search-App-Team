@@ -14,6 +14,7 @@
     <link href="Assets/jquery.dataTables.min.css" rel="stylesheet" />
 
     <style>
+        
         .dataTables_wrapper {
             position: relative;
             clear: both;
@@ -144,23 +145,23 @@
                             <div class="row mb-3">
 
                                 <div class="col">
-                                    <div>Name</div> 
+                                    <div>Name</div>
                                     <input class="form-control" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />
                                 </div>
                                 <div class="col">
-                                    <div>Address</div> 
+                                    <div>Address</div>
                                     <textarea id="txtAddress" class="form-control" placeholder="Enter address" name="txt_address" runat="server"></textarea>
                                 </div>
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <div>State</div> 
-                                   <asp:DropDownList ID="drpState" runat="server" class="form-control" OnSelectedIndexChanged="drpState_SelectedIndexChanged" AutoPostBack="True">
+                                    <div>State</div>
+                                    <asp:DropDownList ID="drpState" runat="server" class="form-control" OnSelectedIndexChanged="drpState_SelectedIndexChanged" AutoPostBack="True">
                                         <asp:ListItem>Select State</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
                                 <div class="col">
-                                    <div>City</div> 
+                                    <div>City</div>
                                     <asp:DropDownList ID="drpCity" runat="server" class="form-control">
                                         <asp:ListItem>Select City</asp:ListItem>
                                     </asp:DropDownList>
@@ -169,21 +170,29 @@
                             </div>
                             <div class="row mb-3">
                                 <div class="col">
-                                    <div>Postal Code</div>                                   
+                                    <div>Postal Code</div>
                                     <input id="txtPostalCode" class="form-control" placeholder="Enter postal code" name="txt_pincode" runat="server" />
                                 </div>
                                 <div class="col">
-                                    <div>Search Type [Logical Operator between Name, Address] </div> 
+                                    <div>Search Type [Logical Operator between Name, Address] </div>
+                                    <asp:DropDownList ID="drLogicalOperator" runat="server" class="form-control">
+                                        <asp:ListItem>OR</asp:ListItem>
+                                        <asp:ListItem>AND</asp:ListItem>
+                                    </asp:DropDownList>
+                                </div>
 
-                                    <asp:RadioButton  ID="rd_and" GroupName="logicalOperator" runat="server" Text="AND " />
-                                     <asp:RadioButton ID="rd_or" GroupName="logicalOperator" runat="server" Text="OR" Checked />
-                                </div>>
-                                
+                                <%--<div class="col">
+                                    <div>Search Type [Logical Operator between Name, Address] </div>
+
+                                    <asp:RadioButton ID="rd_and" GroupName="logicalOperator" runat="server" Text="AND " />
+                                    <asp:RadioButton ID="rd_or" GroupName="logicalOperator" runat="server" Text="OR" Checked />
+                                </div>
+                                >--%>
                             </div>
                             <div class="row">
                                 <div class="col">
-    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
-</div>
+                                    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+                                </div>
                                 <div class="col">
                                     <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
                                 </div>

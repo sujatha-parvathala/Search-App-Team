@@ -16,11 +16,15 @@ namespace Search_App.BL
         private readonly SearchAppRepository _repo;
         private readonly SalesforceBL _sfBL;
         private readonly SqlDsBL _sqlDsBL;
+        private readonly ElasticSearchBL _elasticsearchBL;
+        private readonly FlateFileBL _flatFileBL;
         public SearchBL()
         {
             _repo = new SearchAppRepository(); 
             _sfBL = new SalesforceBL();
             _sqlDsBL = new SqlDsBL();
+            _elasticsearchBL= new ElasticSearchBL();
+            _flatFileBL = new FlateFileBL();
         }
 
         public List<SResponse> SearchResult(SRequest request, string appCode)
@@ -47,7 +51,7 @@ namespace Search_App.BL
                                 }
                                 break;
                             case 2:
-                                serarchResult = GetDataFromElasticSearch(request, d);
+                                serarchResult = _elasticsearchBL.GetDataFromElasticSearch(request, d);
                                 if (serarchResult != null && serarchResult.Count > 0)
                                 {
                                     dsResult.AddRange(serarchResult.ToList());
@@ -60,6 +64,15 @@ namespace Search_App.BL
                                     dsResult.AddRange(serarchResult.ToList());
                                 }
                                 break;
+                             case 4:
+                                serarchResult = _flatFileBL.GetDataFromFlatFile(request, d);
+                               
+                                if (serarchResult != null && serarchResult.Count > 0)
+                                {
+                                    dsResult.AddRange(serarchResult.ToList());
+                                }
+                                break;
+
                         }
                         
                     }
@@ -79,22 +92,7 @@ namespace Search_App.BL
             return result;
         }
 
-        private List<SResponse> GetDataFromElasticSearch(SRequest request, DataSource ds)
-        {
-            List<SResponse> esResult = new List<SResponse>();
-            try
-            {
-
-            }
-            catch (Exception ex)
-            {
-            }
-
-
-            return esResult;
-        }
-
-      
+       
 
      
     }

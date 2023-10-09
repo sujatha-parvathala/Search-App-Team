@@ -2,130 +2,68 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="header" runat="server">
-    <title>LOGIN</title>
+    <title>CONFIGURATIONS</title>
     <style>
-        #top, #bottom, #left, #right {
-            background: #219fd4;
-            position: fixed;
-        }
-
-        #left, #right {
-            top: 0;
-            bottom: 0;
-            width: 25px;
-        }
-
-        #left {
-            left: 0;
-        }
-
-        #right {
-            right: 0;
-        }
-
-        #top, #bottom {
-            left: 0;
-            right: 0;
-            height: 25px;
-        }
-
-        #top {
-            top: 0;
-        }
-
-        #bottom {
-            bottom: 0;
-        }
-
-        /*body {
-            max-width: 100%;
-            margin: 0;
-            padding: 50px 20px 150px 20px;
-            height: 100%;
-        }*/
-
-        .logo-holder_mittun {
-            position: relative;
-            margin: 0 auto;
+        .form-check {
             display: block;
-            width: 100%;
-            max-width: 360px;
-        }
-
-        .message-holder_mittun {
-            width: 100%;
-            max-width: 600px;
-            margin: 10px auto 50px;
-            display: block;
-            position: relative;
-            text-align: center;
-        }
-
-        .message-text_mittun {
-            color: #666666;
-            font-size: 18px;
-            border-top: 1px solid #ccc;
-            border-bottom: 1px solid #ccc;
-            padding: 25px;
-        }
-
-        .progress-holder_mittun {
-            position: relative;
-            margin: 0 auto;
-            display: block;
-            width: 50px;
-        }
-
-        .gif-holder_mittun {
-            opacity: .2;
-            -moz-opacity: .2;
-            -webkit-opacity: .2;
-            width: 50px;
-        }
-
-        .pulsate {
-            -webkit-animation: pulsate 3s ease-out;
-            -webkit-animation-iteration-count: infinite;
-            opacity: 0.2;
-        }
-
-        @-webkit-keyframes pulsate {
-            0% {
-                opacity: 0.2;
-            }
-
-            50% {
-                opacity: 1.0;
-            }
-
-            100% {
-                opacity: 0.2;
-            }
-        }
-
-        @media
-        /* Fairly small screens including iphones */
-        only screen and (max-width: 480px) {
-            #top, #bottom {
-                height: 10px;
-            }
-
-            #left, #right {
-                width: 10px
-            }
+            min-height: 1.5rem;
+            padding-left: 1.5em;
+            font-size: large;
+            margin-bottom: .125rem;
+            font-family: monospace;
         }
     </style>
 </asp:Content>
 
 <asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
-    <div class="message-holder_mittun">
-        <p class="message-text_mittun pulsate">
-            Have fun giving to a cause you care about.
-  <br />
-            <span style="display: block; padding-top: 12px; font-size: .8em;">(website coming soon)</span>
-        </p>
+
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Basic Layout & Basic with Icons -->
+
+            <div class="row">
+                <!-- Basic Layout -->
+                <div class="col-xxl">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Configurations</h5>
+                            <small style="display: none;" class="text-muted float-end">Default label</small>
+                        </div>
+                        <div class="card-body" runat="server" id="divConfigurations">
+
+
+
+
+
+
+                            <%--<div class="row mb-3">
+                                <div class="col">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                    <label class="custom-control-label" for="customCheck1">Email each time a vulnerability is found</label>
+                                </div>
+                            </div>
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <input type="checkbox" class="custom-control-input" id="customCheck1" checked="">
+                                    <label class="custom-control-label" for="customCheck1">Email each time a vulnerability is found</label>
+                                </div>
+                            </div>--%>
+                        </div>
+                        <div class="row">
+                            <div class="col">
+                                <asp:Button ID="btnSearch" runat="server" Text="Save" CssClass="btn btn-primary" />
+                            </div>
+                            <div class="col">
+                                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
-    <div class="progress-holder_mittun">
-        <img class="gif-holder_mittun" src="https://downloads.mittun.com/files/assets/loader.gif">
-    </div>
+
+
+
 </asp:Content>

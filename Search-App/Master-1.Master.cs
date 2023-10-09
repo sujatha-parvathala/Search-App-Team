@@ -11,7 +11,11 @@ namespace Search_App
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-
+            if (Session["AppName"] == null && Session["AppCode"]==null)
+            {
+                Response.Redirect("Index.aspx");
+            }
+              
         }
     }
 }

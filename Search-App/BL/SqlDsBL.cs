@@ -94,15 +94,17 @@ namespace Search_App.BL
 
             if ((!string.IsNullOrEmpty(name) && name.Length > 0) && !string.IsNullOrEmpty(address) && address.Length > 0)
             {
-                if(request.AndLogicalOperator)
-                {
-                    clause = "(FREETEXT([Name],@p_name) AND FREETEXT([Address],@p_address))";
-                }
-                else
-                {
-                    clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
-                }
-               
+                //if(request.AndLogicalOperator)
+                //{
+                //    clause = "(FREETEXT([Name],@p_name) AND FREETEXT([Address],@p_address))";
+                //}
+                //else
+                //{
+                //    clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
+                //}
+
+                clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
+
                 parameters.Add(new SqlParameter("@p_name", name));
                 parameters.Add(new SqlParameter("@p_address", address));
             }

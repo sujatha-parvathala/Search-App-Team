@@ -50,5 +50,6 @@ namespace Search_App.Controllers
             // NSScore=100, ADScore=100,Score=100
             //} });
         }
+
     }
 }

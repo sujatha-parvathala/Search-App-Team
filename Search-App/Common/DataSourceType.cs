@@ -9,7 +9,8 @@ namespace Search_App.Common
     {
         SalesForce =1,
         ElasticSearch=2,
-        SQL=3
+        SQL=3,
+        FlatFile=4
 
     }
 }
