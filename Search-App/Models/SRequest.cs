@@ -25,5 +25,6 @@ namespace Search_App.Models
         public string StateCode { get; set; }
         public string PostalCode { get; set; }
         public string Country { get; set; }
+        public bool AndLogicalOperator { get; set; }
     }
 }

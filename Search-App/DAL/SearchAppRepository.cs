@@ -6,6 +6,9 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Linq;
 using System.Web;
+using System.Text.RegularExpressions;
+using System.Reflection;
+using System.Web.UI;
 
 namespace Search_App.DAL
 {
@@ -68,6 +71,7 @@ namespace Search_App.DAL
                     SqlCommand command = new SqlCommand(sqlQuery, con);
                     command.CommandType = CommandType.Text;
                     command.Parameters.Add("p_groupId", groupId);
+                    
                     Da = new SqlDataAdapter(command);
                     Da.Fill(dt);
                     if (dt != null && dt.Rows.Count > 0)
@@ -88,7 +92,190 @@ namespace Search_App.DAL
             return configs;
         }
         
+        public ApplicationDetails GetApplicationDetails(string appUserName)
+        {
+            ApplicationDetails appDetails = new ApplicationDetails();
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
 
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string sqlQuery = "select * from Applications where AppUserName=@p_appUserName";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@p_appUserName", appUserName);
+
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        appDetails.AppCode = dt.Rows[0]["AppCode"].ToString();
+                        appDetails.AppName = dt.Rows[0]["AppName"].ToString();
+                        appDetails.AppUserName = dt.Rows[0]["AppUserName"].ToString();
+                        appDetails.AppPassword = dt.Rows[0]["AppPassword"].ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+                throw;
+            }
+
+            return appDetails;
+        }
+
+        public List<DataSourceDetails> GetAllDataSourceDetails()
+        {
+            //select ds.Id as Id, ds.GroupId as DataSource, dst.DSType as DataSourceType, dst.Id as DataSourceTypeId
+            //from DataSources ds inner
+            //join DataSourceTypes dst on ds.DataSourceType = dst.Id
+
+            List<DataSourceDetails> dsDetails = new List<DataSourceDetails>();
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string sqlQuery = "select ds.Id as Id, ds.GroupId as DataSourceCode,ds.DataSourceName, dst.DSType as DataSourceType, dst.Id as DataSourceTypeId from DataSources ds inner join DataSourceTypes dst on ds.DataSourceType = dst.Id";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        dsDetails = dt.Select().ToList().Select(dr => new DataSourceDetails
+                        {
+                            Id = Convert.ToInt32(dr["Id"].ToString()),
+                            DataSourceCode = dr["DataSourceCode"].ToString(),
+                            DataSourceName = dr["DataSourceName"].ToString(),
+                            DataSourceType = dr["DataSourceType"].ToString(),
+                            DataSourceTypeId = Convert.ToInt32(dr["DataSourceTypeId"].ToString())
+
+                        }).ToList(); ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return dsDetails;
+        }
+
+        public List<AppDataSources> GetAllAppConfiguredDataSources()
+        {
+            List<AppDataSources> dsDetails = new List<AppDataSources>();
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string sqlQuery = "Select * from ApplicationDSConfigurations";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        dsDetails = dt.Select().ToList().Select(dr => new AppDataSources
+                        {
+                            Id = Convert.ToInt32(dr["Id"].ToString()),
+                            DataSourceCode = dr["GroupId"].ToString(),
+                            AppCode = dr["AppCode"].ToString()
+                        }).ToList(); ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return dsDetails;
+        }
+
+        public List<States> GetAllStates()
+        {
+            List<States> states = new List<States>();
+
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string sqlQuery = "Select * from States";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;                   
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        states = dt.Select().ToList().Select(dr => new States
+                        {
+                            Id = Convert.ToInt32(dr["Id"].ToString()),
+                            Name = dr["Name"].ToString(),
+                            Code = dr["Code"].ToString(),
+                            CountryCode = dr["CountryCode"].ToString()
+
+                        }).ToList(); ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return states;
+        }
+
+        public List<Cities> GetCities(string stateCode)
+        {
+            List<Cities> cities = new List<Cities>();
+
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                   
+                    string sqlQuery = "select * from cities where StateCode=@p_stateCode";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add(new SqlParameter("@p_stateCode", stateCode));
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        cities = dt.Select().ToList().Select(dr => new Cities
+                        {
+                            Id = Convert.ToInt32(dr["Id"].ToString()),
+                            Name = dr["Name"].ToString(),
+                            StateCode = dr["StateCode"].ToString()                           
+
+                        }).ToList(); ;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+
+            return cities;
+        }
 
     }
 }

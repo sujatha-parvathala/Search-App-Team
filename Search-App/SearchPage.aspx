@@ -1,23 +1,15 @@
-﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchPage.aspx.cs" Inherits="Search_App.SearchPage" %>
+﻿<%@ Page Language="C#" AutoEventWireup="true" CodeBehind="SearchPage.aspx.cs" MasterPageFile="~/Master-1.Master" Inherits="Search_App.SearchPage" %>
 
-<!DOCTYPE html>
 
-<html xmlns="http://www.w3.org/1999/xhtml">
-<head runat="server">
+<asp:Content ID="Content2" ContentPlaceHolderID="header" runat="server">
     <title>INTELLIGENCE SEARCH</title>
 
 
-    <!-- Icons font CSS-->
-    <link href="Assets/mdi-font/css/material-design-iconic-font.min.css" rel="stylesheet" />
-    <link href="Assets/font-awesome-4.7/css/font-awesome.min.css" rel="stylesheet" />
 
-    <!-- Font special for pages-->
-    <link href="https://fonts.googleapis.com/css?family=Lato:100,100i,300,300i,400,400i,700,700i,900,900i" rel="stylesheet" />
-    <link href="https://fonts.googleapis.com/css?family=Poppins:100,100i,200,200i,300,300i,400,400i,500,500i,600,600i,700,700i,800,800i,900,900i" rel="stylesheet" />
 
     <!-- Main CSS-->
 
-    <link href="Assets/main.css" rel="stylesheet" />
+
     <!-- Jquery JS-->
     <link href="Assets/jquery.dataTables.min.css" rel="stylesheet" />
 
@@ -29,9 +21,13 @@
             font-family: "Poppins", "Arial", "Helvetica Neue", "sans-serif";
             font-size: 11px;
             padding-bottom: 10px;
-           
         }
 
+        tbody, td, tfoot, th, thead, tr {
+            border-color: inherit;
+            border-style: solid;
+            border-width: 1px;
+        }
 
         .dataTables_filter {
             padding-bottom: 15px;
@@ -55,7 +51,7 @@
         }
 
         .dataTable thead {
-            background-color: #3d2161;
+            background-color: #0d6efd;
             color: white;
         }
 
@@ -73,8 +69,39 @@
             border-radius: 10px;
             color: white;
             padding-left: 250px;
-            background-color: rgb(0, 77, 145);
-            margin-bottom:10px;
+            background-color: #0d6efd;
+            margin-bottom: 10px;
+        }
+
+        #loadingbarspinner.spinner {
+            left: 50%;
+            margin-left: -20px;
+            top: 50%;
+            margin-top: -20px;
+            position: absolute;
+            z-index: 19 !important;
+            animation: loading-bar-spinner 400ms linear infinite;
+        }
+
+            #loadingbarspinner.spinner .spinner-icon {
+                width: 40px;
+                height: 40px;
+                border: solid 4px transparent;
+                border-top-color: #00C8B1 !important;
+                border-left-color: #00C8B1 !important;
+                border-radius: 50%;
+            }
+
+        @keyframes loadingbarspinner {
+            0% {
+                transform: rotate(0deg);
+                transform: rotate(0deg);
+            }
+
+            100% {
+                transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
         }
     </style>
 
@@ -85,96 +112,194 @@
     <script type="text/javascript">
 
         $(document).ready(function () {
-            //alert('ok');
-            //var dt=new DataTable('#example', {
 
-            //}); 
-            var mytable = $('#gv_result').DataTable();
+            var mytable = $('#ContentPlaceHolder1_gv_result').DataTable();
 
         });
 
 
     </script>
 
+</asp:Content>
 
-</head>
-<body>
-    <form id="form1" runat="server">
 
-        <div class="page-wrapper bg-img-3 p-t-15 p-b-100">
-            <div class="wrapper wrapper--w900">
-                <div class="pageHeader">
-                    <h1>Intelligence Search</h1>
-                </div>
-                <div class="card card-6">
-                    <div class="card-body">
 
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Name</label>
-                                    <input class="input--style-1" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Address</label>
-                                    <input id="txtAddress" class="input--style-1" placeholder="Enter address" name="txt_address" runat="server" />
-                                </div>
-                            </div>
+<asp:Content ID="Content1" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
+    <div style="display: none;" id="loadingbarspinner" class="spinner" runat="server" visible="false">
+        <div class="spinner-icon"></div>
+    </div>
+    <div class="content-wrapper">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Basic Layout & Basic with Icons -->
+
+            <div class="row">
+                <!-- Basic Layout -->
+                <div class="col-xxl">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Search</h5>
+                            <small style="display: none;" class="text-muted float-end">Default label</small>
                         </div>
+                        <div class="card-body">
+                            <div class="row mb-3">
 
-                        <div class="row row-space">
-                            <div class="input-group">
-
-                                <label class="label">State</label>
-                                <asp:DropDownList ID="drpState" runat="server" CssClass="input--style-1">
-                                </asp:DropDownList>
-
+                                <div class="col">
+                                    <div>Name</div> 
+                                    <input class="form-control" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />
+                                </div>
+                                <div class="col">
+                                    <div>Address</div> 
+                                    <textarea id="txtAddress" class="form-control" placeholder="Enter address" name="txt_address" runat="server"></textarea>
+                                </div>
                             </div>
-
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">City</label>
-                                    <asp:DropDownList ID="drpCity" runat="server" CssClass="input--style-1">
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div>State</div> 
+                                   <asp:DropDownList ID="drpState" runat="server" class="form-control" OnSelectedIndexChanged="drpState_SelectedIndexChanged" AutoPostBack="True">
+                                        <asp:ListItem>Select State</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="row row-space">
-                            <div class="col-2">
-                                <div class="input-group">
-
-                                    <label class="label">Postal Code</label>
-                                    <input id="txtPostalCode" class="input--style-1" placeholder="Enter pincode" name="txt_pincode" runat="server" />
-
-
+                                <div class="col">
+                                    <div>City</div> 
+                                    <asp:DropDownList ID="drpCity" runat="server" class="form-control">
+                                        <asp:ListItem>Select City</asp:ListItem>
+                                    </asp:DropDownList>
                                 </div>
+
                             </div>
-                            <div class="col-2">
-                                <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn-submit m-b-0" OnClick="btnSearch_Click" />
+                            <div class="row mb-3">
+                                <div class="col">
+                                    <div>Postal Code</div>                                   
+                                    <input id="txtPostalCode" class="form-control" placeholder="Enter postal code" name="txt_pincode" runat="server" />
+                                </div>
+                                <div class="col">
+                                    <div>Search Type [Logical Operator between Name, Address] </div> 
+
+                                    <asp:RadioButton  ID="rd_and" GroupName="logicalOperator" runat="server" Text="AND " />
+                                     <asp:RadioButton ID="rd_or" GroupName="logicalOperator" runat="server" Text="OR" Checked />
+                                </div>>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col">
+    <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
+</div>
+                                <div class="col">
+                                    <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic with Icons -->
+
+            </div>
+        </div>
+    </div>
+
+    <div class="content-wrapper" visible="false" runat="server" id="divResultsSection">
+        <div class="container-xxl flex-grow-1 container-p-y">
+            <!-- Basic Layout & Basic with Icons -->
+            <div class="row">
+                <!-- Basic Layout -->
+                <div class="col-xxl">
+                    <div class="card mb-4">
+                        <div class="card-header d-flex align-items-center justify-content-between">
+                            <h5 class="mb-0">Results</h5>
+                            <small style="display: none;" class="text-muted float-end">Default label</small>
+                        </div>
+                        <div class="card-body">
+                            <asp:GridView ID="gv_result" runat="server"></asp:GridView>
+                        </div>
+                    </div>
+                </div>
+                <!-- Basic with Icons -->
+
+            </div>
+        </div>
+    </div>
+
+
+
+
+    <div style="display: none;" class="page-wrapper bg-img-3 p-t-15 p-b-100">
+        <div class="wrapper wrapper--w900">
+            <div class="pageHeader">
+                <h1>Intelligence Search</h1>
+            </div>
+            <div class="card card-6">
+                <div class="card-body">
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <%-- <label class="label">Name</label>--%>
+                                <%--<input class="input--style-1" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />--%>
+                            </div>
+                        </div>
+                        <div class="col-2">
+                            <div class="input-group">
+                                <%--  <label class="label">Address</label>--%>
+                                <%--<input id="txtAddress" class="input--style-1" placeholder="Enter address" name="txt_address" runat="server" />--%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+                                <%-- <label class="label">State</label>--%>
+                                <%--<asp:DropDownList ID="drpState" runat="server" Width="380px" CssClass="input--style-1">
+                                    <asp:ListItem>Select State</asp:ListItem>
+                                </asp:DropDownList>--%>
+                            </div>
+                        </div>
+
+                        <div class="col-2">
+                            <div class="input-group">
+                                <%--<label class="label">City</label>--%>
+                                <%--  <asp:DropDownList ID="drpCity" runat="server" Width="380px" CssClass="input--style-1">
+                                    <asp:ListItem>Select City</asp:ListItem>
+                                </asp:DropDownList>--%>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="row row-space">
+                        <div class="col-2">
+                            <div class="input-group">
+
+                                <%--<label class="label">Postal Code</label>--%>
+                                <%-- <input id="txtPostalCode" class="input--style-1" placeholder="Enter postal code" name="txt_pincode" runat="server" />--%>
                             </div>
                         </div>
 
                     </div>
-                </div>
-            </div>
-
-        </div>
-
-        <div class="page-wrapper bg-img-3 p-t-15 p-b-100">
-            <div class="wrapper wrapper--w900">
-                <div class="pageHeader">
-                    <h1>Search Results</h1>
-                </div>
-                <div class="card card-6">
-                    <div class="card-body">
-                        <asp:GridView ID="gv_result" runat="server"></asp:GridView>
+                    <div class="row row-space">
+                        <div class="col-12">
+                            <%--<asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn-submit" OnClick="btnSearch_Click" />--%>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
 
-    </form>
-</body>
-</html>
+    </div>
+
+    <div style="display: none;" class="page-wrapper bg-img-3 p-t-15 p-b-100">
+        <div class="wrapper wrapper--w900">
+            <div class="pageHeader">
+                <h1>Search Results</h1>
+            </div>
+            <div class="card card-6">
+                <div class="card-body">
+                    <%-- <asp:GridView ID="gv_result" runat="server"></asp:GridView>--%>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</asp:Content>
+
+

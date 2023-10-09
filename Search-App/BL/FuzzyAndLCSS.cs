@@ -15,8 +15,10 @@ namespace Search_App.BL
         public FuzzyAndLCSS()
         {
             Punctuation = new List<string> { ".", ",", "!", "@", "#" };
-            nameWeight = 60.00;
-            addressWeight = 40.00;
+            //nameWeight = 60.00;
+            //addressWeight = 40.00;
+            nameWeight = 0.00;
+            addressWeight = 00.00;
         }
 
         public List<SResponse> GetResultByApplyingSearchAlgos(SRequest request, List<SResponse> searchResult)
@@ -319,7 +321,7 @@ namespace Search_App.BL
                     }
                     else
                     {
-                        finalScore = finalScore + s.NMADDRScore[j];
+                        finalScore = (double)Math.Max(finalScore, s.NMADDRScore[j]); //finalScore + s.NMADDRScore[j];
                     }
 
                     j++;

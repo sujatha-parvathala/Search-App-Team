@@ -17,6 +17,11 @@ namespace Search_App.Controllers
             _searchBL = new SearchBL();
             
         }
+        [HttpGet]
+        public IHttpActionResult GetTestMessage()
+        {
+            return Ok("Test Message");
+        }
 
         [HttpPost]
         public IHttpActionResult GetResult(Request request)

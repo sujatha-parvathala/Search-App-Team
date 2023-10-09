@@ -93,7 +93,7 @@
     <Content Include="Assets\mdi-font\css\material-design-iconic-font.css" />
     <Content Include="Assets\mdi-font\css\material-design-iconic-font.min.css" />
     <Content Include="Assets\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
-    <Content Include="Congratulations.aspx" />
+    <Content Include="Configurations.aspx" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="PageWithMaster.aspx" />
@@ -107,15 +107,20 @@
     <Compile Include="BL\SearchBL.cs" />
     <Compile Include="BL\FuzzyAndLCSS.cs" />
     <Compile Include="BL\SqlDsBL.cs" />
+    <Compile Include="Common\AppDataSources.cs" />
+    <Compile Include="Common\ApplicationDetails.cs" />
+    <Compile Include="Common\Cities.cs" />
     <Compile Include="Common\DataSource.cs" />
+    <Compile Include="Common\DataSourceDetails.cs" />
     <Compile Include="Common\DataSourceType.cs" />
     <Compile Include="Common\DSConfigDetails.cs" />
-    <Compile Include="Congratulations.aspx.cs">
-      <DependentUpon>Congratulations.aspx</DependentUpon>
+    <Compile Include="Common\States.cs" />
+    <Compile Include="Configurations.aspx.cs">
+      <DependentUpon>Configurations.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Congratulations.aspx.designer.cs">
-      <DependentUpon>Congratulations.aspx</DependentUpon>
+    <Compile Include="Configurations.aspx.designer.cs">
+      <DependentUpon>Configurations.aspx</DependentUpon>
     </Compile>
     <Compile Include="Controllers\SearchController.cs" />
     <Compile Include="DAL\SearchAppRepository.cs" />

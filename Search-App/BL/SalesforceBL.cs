@@ -5,6 +5,7 @@ using Search_App.DAL;
 using Search_App.Models;
 using System;
 using System.Collections.Generic;
+using System.Data.SqlClient;
 using System.Linq;
 using System.Net;
 using System.Net.Http;
@@ -134,7 +135,9 @@ namespace Search_App.BL
             SFResult sfResult = new SFResult();
             try
             {
-                string soqlQuery = "query/?q=select Name,BillingStreet,BillingCity,BillingState,BillingPostalCode from account";
+                string soqlQuery = getSOQLQuery(req);
+
+                    //"query/?q=select Name,BillingStreet,BillingCity,BillingState,BillingPostalCode from account";
                 HttpClient _httpClient = new HttpClient();
                 var request = new HttpRequestMessage
                 {
@@ -155,6 +158,50 @@ namespace Search_App.BL
             }
             return sfResult;
                       
+        }
+
+        private string getSOQLQuery(SRequest request)
+        {
+            string soql = "";
+
+            string clause = "";
+           
+           // string name = (request != null && !string.IsNullOrEmpty(request.Name) && request.Name.Length > 0) ? request.Name.Trim() : string.Empty;
+           // string address = (request != null && !string.IsNullOrEmpty(request.Address) && request.Address.Length > 0) ? request.Address.Trim() : string.Empty;
+            string city = (request != null && !string.IsNullOrEmpty(request.City) && request.City.Length > 0) ? request.City.Trim() : string.Empty;
+            string state = (request != null && !string.IsNullOrEmpty(request.StateCode) && request.StateCode.Length > 0) ? request.StateCode.Trim() : string.Empty;
+            string postalCode = (request != null && !string.IsNullOrEmpty(request.PostalCode) && request.PostalCode.Length > 0) ? request.PostalCode.Trim() : string.Empty;
+
+            //Name,BillingStreet,BillingCity,BillingState,BillingPostalCode from account
+            if (!string.IsNullOrEmpty(city) && city.Length > 0)
+            {
+                clause = string.Format("BillingCity='{0}'", city);
+              
+            }
+            if (!string.IsNullOrEmpty(state) && state.Length > 0)
+            {
+                clause = (!string.IsNullOrEmpty(clause) && clause.Length > 0) ? clause + string.Format("AND BillingState='{0}'", state)
+                    : string.Format("BillingState='{0}'", state);
+              
+            }
+            if (!string.IsNullOrEmpty(postalCode) && postalCode.Length > 0)
+            {
+                clause = (!string.IsNullOrEmpty(clause) && clause.Length > 0) ? clause + string.Format("AND BillingPostalCode='{0}'", postalCode)
+                     : string.Format("BillingPostalCode='{0}'", postalCode);
+            }
+
+            if(!string.IsNullOrEmpty(clause) && clause.Length>0)
+            {
+                soql = "query/?q=select Name,BillingStreet,BillingCity,BillingState,BillingPostalCode from account where "+ clause;
+
+            }
+            else
+            {
+                soql = "query/?q=select Name,BillingStreet,BillingCity,BillingState,BillingPostalCode from account";
+
+            }
+
+            return soql;
         }
     }
 }

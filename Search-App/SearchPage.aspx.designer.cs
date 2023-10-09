@@ -15,13 +15,13 @@ namespace Search_App
     {
 
         /// <summary>
-        /// form1 control.
+        /// loadingbarspinner control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlForm form1;
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl loadingbarspinner;
 
         /// <summary>
         /// txtName control.
@@ -39,7 +39,7 @@ namespace Search_App
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlInputText txtAddress;
+        protected global::System.Web.UI.HtmlControls.HtmlTextArea txtAddress;
 
         /// <summary>
         /// drpState control.
@@ -69,6 +69,24 @@ namespace Search_App
         protected global::System.Web.UI.HtmlControls.HtmlInputText txtPostalCode;
 
         /// <summary>
+        /// rd_and control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rd_and;
+
+        /// <summary>
+        /// rd_or control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.RadioButton rd_or;
+
+        /// <summary>
         /// btnSearch control.
         /// </summary>
         /// <remarks>
@@ -76,6 +94,24 @@ namespace Search_App
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnSearch;
+
+        /// <summary>
+        /// btnClear control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnClear;
+
+        /// <summary>
+        /// divResultsSection control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl divResultsSection;
 
         /// <summary>
         /// gv_result control.
