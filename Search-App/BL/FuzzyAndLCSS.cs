@@ -51,7 +51,7 @@ namespace Search_App.BL
                     finalResult = GetNameAndAddressSearchResult(searchResult, name, address);
                     if(andLogicalOperator)
                     {
-                        finalResult = finalResult.Where(f => f.NSScore >= 50 && f.ADScore >= 50).ToList();
+                        finalResult = finalResult.Where(f => f.NSScore > 50 && f.ADScore > 50).ToList();
                     }
                 }
                 else if (NameProvided)
@@ -111,7 +111,7 @@ namespace Search_App.BL
 
             List<SResponse> finalResult = new List<SResponse>();
 
-            foreach (var sc in scores.Where(s => s.TotalScore >= 50).ToList())
+            foreach (var sc in scores.Where(s => s.TotalScore > 50).ToList())
             {
                 result[sc.index].Score = sc.TotalScore;
                 result[sc.index].NSScore = sc.NMADDRScore[0];
@@ -163,7 +163,7 @@ namespace Search_App.BL
 
             List<SResponse> finalResult = new List<SResponse>();
 
-            foreach (var sc in scores.Where(s => s.TotalScore >= 50).ToList())
+            foreach (var sc in scores.Where(s => s.TotalScore > 50).ToList())
             {
                 result[sc.index].Score = sc.TotalScore;
                 result[sc.index].ADScore = sc.NMADDRScore[0];
