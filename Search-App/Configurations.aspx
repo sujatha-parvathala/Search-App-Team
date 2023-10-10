@@ -12,6 +12,11 @@
             margin-bottom: .125rem;
             font-family: monospace;
         }
+
+        .form-check-input[type=checkbox]{
+            border-radius:.25em;
+            border-color:blue;
+        }
     </style>
 </asp:Content>
 
@@ -26,7 +31,7 @@
                 <div class="col-xxl">
                     <div class="card mb-4">
                         <div class="card-header d-flex align-items-center justify-content-between">
-                            <h5 class="mb-0">Configurations</h5>
+                            <h5 class="mb-0">DataSource Configurations</h5>
                             <small style="display: none;" class="text-muted float-end">Default label</small>
                         </div>
                         <div class="card-body" runat="server" id="divConfigurations">
@@ -49,14 +54,15 @@
                                 </div>
                             </div>--%>
                         </div>
-                        <div class="row">
-                            <div class="col">
-                                <asp:Button ID="btnSearch" runat="server" Text="Save" CssClass="btn btn-primary" />
+                        <div class="card-footer">
+                            <div class="row">
+                                <div class="col">
+                                    <asp:Button ID="btnSearch" runat="server" Text="Save" CssClass="btn btn-primary" />
+                                </div>
+                                <div class="col">
+                                    <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
+                                </div>
                             </div>
-                            <div class="col">
-                                <asp:Button ID="btnClear" runat="server" Text="Clear" CssClass="btn btn-primary" OnClick="btnClear_Click" />
-                            </div>
-
                         </div>
                     </div>
                 </div>

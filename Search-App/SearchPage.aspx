@@ -2,7 +2,7 @@
 
 
 <asp:Content ID="Content2" ContentPlaceHolderID="header" runat="server">
-    <title>INTELLIGENCE SEARCH</title>
+    <title>INTELLIGENT SEARCH</title>
 
 
 
@@ -14,7 +14,6 @@
     <link href="Assets/jquery.dataTables.min.css" rel="stylesheet" />
 
     <style>
-        
         .dataTables_wrapper {
             position: relative;
             clear: both;
@@ -112,11 +111,13 @@
 
     <script type="text/javascript">
 
-        $(document).ready(function () {
-
-            var mytable = $('#ContentPlaceHolder1_gv_result').DataTable();
-
-        });
+              $(document).ready(function () {
+                  // setTimeout(function () {
+                  var mytable = $('#ContentPlaceHolder1_gv_result').DataTable({
+                      order:[[6,'desc']]
+                  });
+                  // }, 3000); 
+              });
 
 
     </script>
@@ -139,7 +140,7 @@
                     <div class="card mb-4">
                         <div class="card-header d-flex align-items-center justify-content-between">
                             <h5 class="mb-0">Search</h5>
-                            <small style="display: none;" class="text-muted float-end">Default label</small>
+                            <small style="display:none;" class="text-muted float-end">Default label</small>
                         </div>
                         <div class="card-body">
                             <div class="row mb-3">
@@ -189,6 +190,9 @@
                                 </div>
                                 >--%>
                             </div>
+
+                        </div>
+                        <div class="card-footer">
                             <div class="row">
                                 <div class="col">
                                     <asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn btn-primary" OnClick="btnSearch_Click" />
@@ -199,7 +203,7 @@
 
                             </div>
                         </div>
-                    </div>
+                     
                 </div>
                 <!-- Basic with Icons -->
 
@@ -207,6 +211,7 @@
         </div>
     </div>
 
+        </div>
     <div class="content-wrapper" visible="false" runat="server" id="divResultsSection">
         <div class="container-xxl flex-grow-1 container-p-y">
             <!-- Basic Layout & Basic with Icons -->
@@ -227,88 +232,7 @@
 
             </div>
         </div>
-    </div>
-
-
-
-
-    <div style="display: none;" class="page-wrapper bg-img-3 p-t-15 p-b-100">
-        <div class="wrapper wrapper--w900">
-            <div class="pageHeader">
-                <h1>Intelligence Search</h1>
-            </div>
-            <div class="card card-6">
-                <div class="card-body">
-
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <%-- <label class="label">Name</label>--%>
-                                <%--<input class="input--style-1" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />--%>
-                            </div>
-                        </div>
-                        <div class="col-2">
-                            <div class="input-group">
-                                <%--  <label class="label">Address</label>--%>
-                                <%--<input id="txtAddress" class="input--style-1" placeholder="Enter address" name="txt_address" runat="server" />--%>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-                                <%-- <label class="label">State</label>--%>
-                                <%--<asp:DropDownList ID="drpState" runat="server" Width="380px" CssClass="input--style-1">
-                                    <asp:ListItem>Select State</asp:ListItem>
-                                </asp:DropDownList>--%>
-                            </div>
-                        </div>
-
-                        <div class="col-2">
-                            <div class="input-group">
-                                <%--<label class="label">City</label>--%>
-                                <%--  <asp:DropDownList ID="drpCity" runat="server" Width="380px" CssClass="input--style-1">
-                                    <asp:ListItem>Select City</asp:ListItem>
-                                </asp:DropDownList>--%>
-                            </div>
-                        </div>
-                    </div>
-
-                    <div class="row row-space">
-                        <div class="col-2">
-                            <div class="input-group">
-
-                                <%--<label class="label">Postal Code</label>--%>
-                                <%-- <input id="txtPostalCode" class="input--style-1" placeholder="Enter postal code" name="txt_pincode" runat="server" />--%>
-                            </div>
-                        </div>
-
-                    </div>
-                    <div class="row row-space">
-                        <div class="col-12">
-                            <%--<asp:Button ID="btnSearch" runat="server" Text="Search" CssClass="btn-submit" OnClick="btnSearch_Click" />--%>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-    </div>
-
-    <div style="display: none;" class="page-wrapper bg-img-3 p-t-15 p-b-100">
-        <div class="wrapper wrapper--w900">
-            <div class="pageHeader">
-                <h1>Search Results</h1>
-            </div>
-            <div class="card card-6">
-                <div class="card-body">
-                    <%-- <asp:GridView ID="gv_result" runat="server"></asp:GridView>--%>
-                </div>
-            </div>
-        </div>
-    </div>
-
+    </div> 
 </asp:Content>
 
 

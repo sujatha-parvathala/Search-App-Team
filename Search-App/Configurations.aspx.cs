@@ -15,9 +15,7 @@ namespace Search_App
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            FillDataSources();
-
-
+            FillDataSources(); 
         }
 
         private void FillDataSources()
@@ -34,31 +32,31 @@ namespace Search_App
             //List<SelectedConfiguration> selectedConfigurations = JsonConvert.DeserializeObject<List<SelectedConfiguration>>(selectedConfigs);
             string configDiv = string.Empty;
             int i =0;
-            configDiv = configDiv + "<div class='row mb-3'";
+            //configDiv = configDiv + "<div class='row mb-3'";
             bool isAppDS = false;
 
             foreach (var ds in allDataSource)
             {
                 i++;
-                configDiv += "<div class='col'>";
+                configDiv += "<div class='form-check'>";
                 isAppDS = appDataSources.Any(a => a.DataSourceCode == ds.DataSourceCode);
                 if(isAppDS)
                 {
-                    configDiv += "<input type='checkbox' class='custom-control-input' id='customCheck" + i + "' checked='" + true + "'> ";
+                    configDiv += "<input type='checkbox' class='form-check-input' id='customCheck" + i + "' checked='" + true + "'> ";
                 }
                 else
                 {
-                    configDiv += "<input type='checkbox' class='custom-control-input' id='customCheck" + i + "'>";
+                    configDiv += "<input type='checkbox' class='form-check-input' id='customCheck" + i + "'>";
                 }
                
                 string strlabel = ds.DataSourceName + " (" + ds.DataSourceType + ")";
-                configDiv += "<label class='form-check-label' for='defaultCheck" + i +"'>" + strlabel + "</label>";
+                configDiv += "<label class='form-check-label' for='customCheck" + i +"'>" + strlabel + "</label>";
 
                 
                 configDiv += "</div>";
             }
            
-            configDiv += "</div>";
+            //configDiv += "</div>";
 
             divConfigurations.InnerHtml = configDiv;
         }

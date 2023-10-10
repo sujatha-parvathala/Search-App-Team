@@ -70,8 +70,8 @@ namespace Search_App
 
         private void ClearGridView()
         {
-            //gv_result.DataSource = null;
-            //gv_result.DataBind();
+            gv_result.DataSource = null;
+            gv_result.DataBind();
             divResultsSection.Visible = false;
         }
         private void FillStates()
