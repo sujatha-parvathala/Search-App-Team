@@ -70,8 +70,9 @@ namespace Search_App
 
         private void ClearGridView()
         {
-            gv_result.DataSource = null;
-            gv_result.DataBind();
+            //gv_result.DataSource = null;
+            //gv_result.DataBind();
+            divResultsSection.Visible = false;
         }
         private void FillStates()
         {
@@ -107,6 +108,7 @@ namespace Search_App
             if (!string.IsNullOrEmpty(drpState.SelectedValue))
             {
                 FillCities();
+                ClearGridView();
             }
         }
     }

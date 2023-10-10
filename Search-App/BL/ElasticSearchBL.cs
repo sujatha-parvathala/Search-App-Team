@@ -92,7 +92,7 @@ namespace Search_App.BL
                     Query = name,
                     FuzzyTranspositions = true,
                     Fuzziness = Fuzziness.Auto,
-                    MinimumShouldMatch = 1
+                    MinimumShouldMatch = "1<50%"
                 });
             }
             if ((!string.IsNullOrEmpty(address) && address.Length > 0))
@@ -103,7 +103,8 @@ namespace Search_App.BL
                     Query = address,
                     FuzzyTranspositions = true,
                     Fuzziness = Fuzziness.Auto,
-                    MinimumShouldMatch = 1
+                    MinimumShouldMatch = "1<50%"
+                   
                 });
             }
             if ((!string.IsNullOrEmpty(city) && city.Length > 0))
