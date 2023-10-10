@@ -61,6 +61,9 @@ Body {
 <body>    
    
     <form runat="server">  
+        <div>
+            <center> <h1> Intelligent Search </h1> </center>
+        </div>
         <div class="container">   
             <center> <h1> Login </h1> </center>   
             <label>Username : </label>   

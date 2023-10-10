@@ -176,8 +176,8 @@
                                 <div class="col">
                                     <div>Search Type [Logical Operator between Name, Address] </div>
                                     <asp:DropDownList ID="drLogicalOperator" runat="server" class="form-control">
-                                        <asp:ListItem>OR</asp:ListItem>
-                                        <asp:ListItem>AND</asp:ListItem>
+                                        <asp:ListItem Text="OR" Value="false">OR</asp:ListItem>
+                                        <asp:ListItem Text="AND" Value="true">AND</asp:ListItem>
                                     </asp:DropDownList>
                                 </div>
 

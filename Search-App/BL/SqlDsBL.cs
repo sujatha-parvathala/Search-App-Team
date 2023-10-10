@@ -60,10 +60,12 @@ namespace Search_App.BL
                     {
                         sqlResult = dt.Select().ToList().Select(dr => new SResponse
                         {
+                            
                             Name = dr["Name"]?.ToString(),
                             Address = dr["Address"]?.ToString(),
                             City = dr["City"]?.ToString(),
                             StateCode = dr["State"]?.ToString(),
+                            PostalCode = dr["PostalCode"]?.ToString(),
                             Country = dr["CountryCode"]?.ToString()
                         }).ToList();
 
@@ -103,19 +105,20 @@ namespace Search_App.BL
                 //    clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
                 //}
 
-                clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
+                clause = "(FREETEXT([Name],@p_name) OR CONTAINS([Name],@p_name) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)) " +
+                    "OR FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_address) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)) )";
 
                 parameters.Add(new SqlParameter("@p_name", name));
                 parameters.Add(new SqlParameter("@p_address", address));
             }
             else if (!string.IsNullOrEmpty(name) && name.Length > 0)
             {
-                clause = "FREETEXT([Name], @p_Name)";
+                clause = "(FREETEXT([Name], @p_Name) OR CONTAINS([Name],@p_name) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)))";
                 parameters.Add(new SqlParameter("@p_name", name));
             }
             else if (!string.IsNullOrEmpty(address) && address.Length > 0)
             {
-                clause = "FREETEXT([Address],@p_address)";
+                clause = "(FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_address) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)))";
                 parameters.Add(new SqlParameter("@p_address", address));
             }
 

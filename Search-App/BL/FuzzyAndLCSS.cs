@@ -15,10 +15,10 @@ namespace Search_App.BL
         public FuzzyAndLCSS()
         {
             Punctuation = new List<string> { ".", ",", "!", "@", "#" };
-            //nameWeight = 60.00;
-            //addressWeight = 40.00;
-            nameWeight = 0.00;
-            addressWeight = 00.00;
+            nameWeight = 70.00;
+            addressWeight = 30.00;
+            //nameWeight = 0.00;
+            //addressWeight = 00.00;
         }
 
         public List<SResponse> GetResultByApplyingSearchAlgos(SRequest request, List<SResponse> searchResult)
@@ -27,6 +27,7 @@ namespace Search_App.BL
 
             bool NameProvided = false;
             bool AddressProvided = false;
+            bool andLogicalOperator = request.AndLogicalOperator;
 
             string name, address, city, state, postalcode;
             name = request.Name;
@@ -48,6 +49,10 @@ namespace Search_App.BL
                 if (AddressProvided && NameProvided)
                 {
                     finalResult = GetNameAndAddressSearchResult(searchResult, name, address);
+                    if(andLogicalOperator)
+                    {
+                        finalResult = finalResult.Where(f => f.NSScore >= 50 && f.ADScore >= 50).ToList();
+                    }
                 }
                 else if (NameProvided)
                 {
@@ -106,7 +111,7 @@ namespace Search_App.BL
 
             List<SResponse> finalResult = new List<SResponse>();
 
-            foreach (var sc in scores.Where(s => s.TotalScore > 50).ToList())
+            foreach (var sc in scores.Where(s => s.TotalScore >= 50).ToList())
             {
                 result[sc.index].Score = sc.TotalScore;
                 result[sc.index].NSScore = sc.NMADDRScore[0];

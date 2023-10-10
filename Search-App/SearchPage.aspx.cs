@@ -28,11 +28,12 @@ namespace Search_App
             SRequest sreq
                 = new SRequest
                 {
-                    Name = txtName.Value, 
-                    Address= txtAddress.Value,
-                    StateCode= (drpState.SelectedIndex == 0) ? "" : drpState.SelectedValue,
-                    City= (drpCity.SelectedIndex == 0)?"":drpCity.SelectedValue,//drpCity.SelectedValue,
-                    PostalCode= txtPostalCode.Value
+                    Name = txtName.Value,
+                    Address = txtAddress.Value,
+                    StateCode = (drpState.SelectedIndex == 0) ? "" : drpState.SelectedValue,
+                    City = (drpCity.SelectedIndex == 0) ? "" : drpCity.SelectedValue,//drpCity.SelectedValue,
+                    PostalCode = txtPostalCode.Value,
+                    AndLogicalOperator = Convert.ToBoolean(drLogicalOperator.SelectedValue)
                 };
             string appCode = (string)Session["AppCode"];
 
@@ -61,8 +62,17 @@ namespace Search_App
             FillCities();
             drpState.SelectedIndex = 0;
             drpCity.SelectedIndex = 0;
+
+            ClearGridView();
+
+
         }
 
+        private void ClearGridView()
+        {
+            gv_result.DataSource = null;
+            gv_result.DataBind();
+        }
         private void FillStates()
         {
             SearchAppRepository repo = new SearchAppRepository();
