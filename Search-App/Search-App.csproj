@@ -116,6 +116,7 @@
     <Content Include="Assets\mdi-font\css\material-design-iconic-font.min.css" />
     <Content Include="Assets\mdi-font\fonts\Material-Design-Iconic-Font.svg" />
     <Content Include="Configurations.aspx" />
+    <Content Include="Data\CustData.txt" />
     <Content Include="Global.asax" />
     <Content Include="Index.aspx" />
     <Content Include="PageWithMaster.aspx" />

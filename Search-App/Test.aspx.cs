@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using Nest;
 using Newtonsoft.Json;
+using Search_App.BL;
 using Search_App.DAL;
 using Search_App.Models;
 using System;
@@ -21,6 +22,12 @@ namespace Search_App
     {
         protected void Page_Load(object sender, EventArgs e)
         {
+            FlateFileBL flateFileBL = new FlateFileBL();
+
+            var result = flateFileBL.GetDataFromFlatFile(new SRequest { Name = "smith" }, new Common.DataSource { });
+            var intVal = 0;
+
+            
 
             //SearchAppRepository repo = new SearchAppRepository();
 

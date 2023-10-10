@@ -24,7 +24,10 @@ namespace Search_App.BL
 
             try
             {
-                string fileContent = System.IO.File.ReadAllText(@"D:\Sujatha\Data\CustData.txt");
+                //string filePath = @"D:\Sujath;a\Data\CustData.txt";
+
+                string filePath = System.Web.HttpContext.Current.Server.MapPath("/Data/CustData.txt");
+                string fileContent = System.IO.File.ReadAllText(filePath);
                 fileResult = JsonConvert.DeserializeObject<List<SResponse>>(fileContent);
 
                 algoAppliedResult = _fuzzyAndLCSS.GetResultByApplyingSearchAlgos(request, fileResult);
