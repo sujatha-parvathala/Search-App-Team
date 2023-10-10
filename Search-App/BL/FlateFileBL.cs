@@ -1,5 +1,6 @@
 ﻿using Newtonsoft.Json;
 using Search_App.Common;
+using Search_App.DAL;
 using Search_App.Models;
 using System;
 using System.Collections.Generic;
@@ -11,16 +12,19 @@ namespace Search_App.BL
     public class FlateFileBL
     {
         private readonly FuzzyAndLCSS _fuzzyAndLCSS;
+        private readonly SearchAppRepository _repo;
 
         public FlateFileBL()
         {
             _fuzzyAndLCSS = new FuzzyAndLCSS();
+            _repo = new SearchAppRepository();
         }
 
         public List<SResponse> GetDataFromFlatFile(SRequest request, DataSource ds)
         {
             List<SResponse> fileResult = new List<SResponse>();
             List<SResponse> algoAppliedResult = new List<SResponse>();
+            string recordSource = _repo.GetDataSourceName(ds.GroupId);
 
             try
             {
@@ -80,6 +84,10 @@ namespace Search_App.BL
                 }
 
                 algoAppliedResult = _fuzzyAndLCSS.GetResultByApplyingSearchAlgos(request, fileResult);
+                foreach (var item in algoAppliedResult)
+                {
+                    item.RecordSource = recordSource;
+                }
             }
             catch (Exception ex)
             {

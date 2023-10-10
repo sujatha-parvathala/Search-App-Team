@@ -20,12 +20,13 @@ namespace Search_App.Models
         public string Address { get; set; }
         public string City { get; set; }
         public string StateCode { get; set; }
-        public string PostalCode { get; set; }
+        public string PostalCode { get; set; }        
         public string Country { get; set; }
 
         public double Score { get; set; }
         public double NSScore { get; set; }
         public double ADScore { get; set; }
+        public string RecordSource { get; set; }
 
     }
 }

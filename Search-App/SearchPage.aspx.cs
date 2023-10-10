@@ -23,13 +23,15 @@ namespace Search_App
 
         protected void btnSearch_Click(object sender, EventArgs e)
         {
+            string name = txtName.Value;
+            string address = txtAddress.Value;
             
             SearchBL _search = new SearchBL();
             SRequest sreq
                 = new SRequest
                 {
-                    Name = txtName.Value,
-                    Address = txtAddress.Value,
+                    Name = name,
+                    Address = address,
                     StateCode = (drpState.SelectedIndex == 0) ? "" : drpState.SelectedValue,
                     City = (drpCity.SelectedIndex == 0) ? "" : drpCity.SelectedValue,//drpCity.SelectedValue,
                     PostalCode = txtPostalCode.Value,
@@ -44,6 +46,20 @@ namespace Search_App
             gv_result.DataBind(); 
             if (result.Count > 0)
             {
+                gv_result.HeaderRow.Cells[1].Text = "Steet";
+                //gv_result.HeaderRow.Cells[5].Visible = false;
+                //gv_result.Columns[5].Visible = false;
+                //if(string.IsNullOrEmpty(name))
+                //{
+                //    gv_result.HeaderRow.Cells[7].Visible = false;
+                //    gv_result.Columns[7].Visible = false;
+                //}
+                //if (string.IsNullOrEmpty(address))
+                //{
+                //    gv_result.HeaderRow.Cells[8].Visible = false;
+                //    gv_result.Columns[8].Visible = false;
+                //}
+
                 gv_result.HeaderRow.TableSection = TableRowSection.TableHeader;
                 divResultsSection.Visible = true;
             }

@@ -277,5 +277,34 @@ namespace Search_App.DAL
             return cities;
         }
 
+        public string GetDataSourceName(string dsCode)
+        {
+            string dsName = "";
+            try
+            {
+                SqlDataAdapter Da = new SqlDataAdapter();
+                DataTable dt = new DataTable();
+
+                using (SqlConnection con = new SqlConnection(connectionString))
+                {
+                    string sqlQuery = "select DataSourceName from DataSources where GroupId =@p_dscode";
+                    SqlCommand command = new SqlCommand(sqlQuery, con);
+                    command.CommandType = CommandType.Text;
+                    command.Parameters.Add("@p_dscode", dsCode);
+                    Da = new SqlDataAdapter(command);
+                    Da.Fill(dt);
+                    if (dt != null && dt.Rows.Count > 0)
+                    {
+                        dsName = dt.Rows[0][0]?.ToString();
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+
+            }
+            return dsName;
+        }
+    
     }
 }

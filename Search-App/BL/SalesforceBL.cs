@@ -31,7 +31,8 @@ namespace Search_App.BL
         {
             List<SResponse> sfResult = new List<SResponse>();  
             List<SResponse> algoAppliedResult = new List<SResponse>();
-          
+            string recordSource = _repo.GetDataSourceName(ds.GroupId);
+
             try
             {
                 SetAuthTokenAndInstanceUrl(ds);
@@ -45,7 +46,8 @@ namespace Search_App.BL
                         Address = r.BillingStreet,
                         City = r.BillingCity,
                         StateCode = r.BillingState,
-                        PostalCode = r.BillingPostalCode
+                        PostalCode = r.BillingPostalCode,
+                         RecordSource = recordSource
                     }).ToList();
 
                     algoAppliedResult = _fuzzyAndLCSS.GetResultByApplyingSearchAlgos(req, sfResult);

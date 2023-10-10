@@ -1,6 +1,7 @@
 ﻿using Elasticsearch.Net;
 using Nest;
 using Search_App.Common;
+using Search_App.DAL;
 using Search_App.Models;
 using System;
 using System.Collections.Generic;
@@ -12,16 +13,19 @@ namespace Search_App.BL
     public class ElasticSearchBL
     {
         private readonly FuzzyAndLCSS _fuzzyAndLCSS;
+        private readonly SearchAppRepository _repo;
 
         public ElasticSearchBL()
         {
             _fuzzyAndLCSS = new FuzzyAndLCSS();
+            _repo = new SearchAppRepository();
         }
         public List<SResponse> GetDataFromElasticSearch(SRequest request, DataSource ds)
         {
 
             List<SResponse> esResult = new List<SResponse>();
             List<SResponse> algoAppliedResult = new List<SResponse>();
+            string recordSource = _repo.GetDataSourceName(ds.GroupId);
             try
             {
                 ElasticClient esClient = GetElasticClient();
@@ -43,7 +47,8 @@ namespace Search_App.BL
 
                         esResult = customers.Select(c=> new SResponse {
                             Name=c.name, Address=c.address, StateCode=c.state,
-                            PostalCode=c.postalcode,ADScore=0,NSScore=0,Score=0, City=c.city, Country="USA"
+                            PostalCode=c.postalcode,ADScore=0,NSScore=0,Score=0, City=c.city, Country="USA",
+                            RecordSource = recordSource
                         }).ToList();
                     }
                 }

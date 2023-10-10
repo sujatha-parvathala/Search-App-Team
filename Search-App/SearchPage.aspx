@@ -150,7 +150,7 @@
                                     <input class="form-control" type="text" id="txtName" runat="server" name="txtName" placeholder="Enter name" />
                                 </div>
                                 <div class="col">
-                                    <div>Address</div>
+                                    <div>Street</div>
                                     <textarea id="txtAddress" class="form-control" placeholder="Enter address" name="txt_address" runat="server"></textarea>
                                 </div>
                             </div>

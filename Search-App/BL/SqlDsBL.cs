@@ -15,6 +15,7 @@ namespace Search_App.BL
     {
         private readonly string connectionString;
         private readonly FuzzyAndLCSS _fuzzyAndLCSS;
+        private readonly SearchAppRepository _repo;
 
         public SqlDsBL()
         {
@@ -22,12 +23,15 @@ namespace Search_App.BL
 "Initial Catalog=Practice;" +
 "Integrated Security=SSPI;";
             _fuzzyAndLCSS = new FuzzyAndLCSS();
+            _repo = new SearchAppRepository();
         }
 
         public List<SResponse> GetDataFromSQL(SRequest request, DataSource ds)
         {
             List<SResponse> sqlResult = new List<SResponse>();
             List<SResponse> algoAppliedResult = new List<SResponse>();
+            string recordSource = _repo.GetDataSourceName(ds.GroupId);
+
             try
             {
                 SqlDataAdapter Da = new SqlDataAdapter();
@@ -66,7 +70,8 @@ namespace Search_App.BL
                             City = dr["City"]?.ToString(),
                             StateCode = dr["State"]?.ToString(),
                             PostalCode = dr["PostalCode"]?.ToString(),
-                            Country = dr["CountryCode"]?.ToString()
+                            Country = dr["CountryCode"]?.ToString(),
+                            RecordSource = recordSource
                         }).ToList();
 
                         algoAppliedResult = _fuzzyAndLCSS.GetResultByApplyingSearchAlgos(request, sqlResult);
