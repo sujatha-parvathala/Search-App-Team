@@ -87,6 +87,16 @@ namespace Search_App.BL
 
             return algoAppliedResult;
         }
+
+        private string GetStringForContainsFunction(string searchTerm)
+        {
+            string ContainsTerm="";
+            if (!string.IsNullOrEmpty(searchTerm))
+            {
+                ContainsTerm = string.Join(" OR ", searchTerm.Split(' '));
+            }
+            return ContainsTerm;
+        }
     
         private Tuple<string, List<SqlParameter>> GetWhereClauseAndParameters(SRequest request)
         {
@@ -109,22 +119,34 @@ namespace Search_App.BL
                 //{
                 //    clause = "(FREETEXT([Name],@p_name) OR FREETEXT([Address],@p_address))";
                 //}
+                string cname = GetStringForContainsFunction(name);
+                string caddress = GetStringForContainsFunction(address);
 
-                clause = "(FREETEXT([Name],@p_name) OR CONTAINS([Name],@p_name) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)) " +
-                    "OR FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_address) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)) )";
+
+                clause = "(FREETEXT([Name],@p_name) OR CONTAINS([Name],@p_cname) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)) " +
+                    "OR FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_caddress) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)) )";
 
                 parameters.Add(new SqlParameter("@p_name", name));
                 parameters.Add(new SqlParameter("@p_address", address));
+                parameters.Add(new SqlParameter("@p_cname", cname));
+                parameters.Add(new SqlParameter("@p_caddress", caddress));
+
             }
             else if (!string.IsNullOrEmpty(name) && name.Length > 0)
             {
-                clause = "(FREETEXT([Name], @p_Name) OR CONTAINS([Name],@p_name) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)))";
+                string cname = GetStringForContainsFunction(name);
+               
+                clause = "(FREETEXT([Name], @p_Name) OR CONTAINS([Name],@p_cname) OR (SOUNDEX([Name]) = SOUNDEX(@p_name)))";
                 parameters.Add(new SqlParameter("@p_name", name));
+                parameters.Add(new SqlParameter("@p_cname", cname));
+               
             }
             else if (!string.IsNullOrEmpty(address) && address.Length > 0)
             {
-                clause = "(FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_address) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)))";
+                string caddress = GetStringForContainsFunction(address);
+                clause = "(FREETEXT([Address],@p_address) OR CONTAINS([Address],@p_caddress) OR (SOUNDEX([Address]) = SOUNDEX(@p_address)))";
                 parameters.Add(new SqlParameter("@p_address", address));
+                parameters.Add(new SqlParameter("@p_caddress", caddress));
             }
 
             if (!string.IsNullOrEmpty(city) && city.Length > 0)
